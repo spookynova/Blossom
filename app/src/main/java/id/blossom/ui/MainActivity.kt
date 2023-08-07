@@ -72,7 +72,6 @@ class ViewPagerAdapter(supportFragmentManager: FragmentManager) :
             1 -> SearchFragment()
             2 -> ScheduleFragment()
             3 -> FavoriteFragment()
-            4 -> SettingsFragment()
             else -> HomeFragment()
         }
     }
