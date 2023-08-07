@@ -52,23 +52,16 @@ class LocalAnimeRepository @Inject constructor(private val favoriteDao: Favorite
         }
     }
 
-    fun updateDarkMode(isDarkMode: Boolean) {
+    fun updateUserSettings(userSettingsEntity: UserSettingsEntity) {
         GlobalScope.launch {
-            userSettingsDao.updateDarkMode(isDarkMode)
+            userSettingsDao.updateUserSettings(
+                vidQuality = userSettingsEntity.vidQuality,
+                isDarkMode = userSettingsEntity.isDarkMode,
+                isDevMode = userSettingsEntity.isDevMode
+            )
         }
     }
 
-    fun updateVidQuality(vidQuality: String) {
-        GlobalScope.launch {
-            userSettingsDao.updateVidQuality(vidQuality)
-        }
-    }
-
-    fun updateDevMode(isDevMode: Boolean) {
-        GlobalScope.launch {
-            userSettingsDao.updateDevMode(isDevMode)
-        }
-    }
 
     fun insertUserSettings(userSettingsEntity: UserSettingsEntity) {
         GlobalScope.launch {

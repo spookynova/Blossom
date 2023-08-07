@@ -17,7 +17,7 @@ interface CurrentWatchDao {
     @Query("SELECT * FROM current_watch_table WHERE isAlreadyPlaying = 1")
     fun getCurrentWatch(): List<CurrentWatchEntity>
 
-    @Query("SELECT * FROM current_watch_table WHERE isAlreadyPlaying = 1 AND animeId = :animeId LIMIT 1")
+    @Query("SELECT * FROM current_watch_table WHERE isAlreadyPlaying = 1 AND animeId = :animeId GROUP BY animeId LIMIT 1")
     fun getCurrentWatchByAnimeIdAndIsAlreadyPlaying(animeId: String): CurrentWatchEntity
 
     @Query("SELECT * FROM current_watch_table WHERE isAlreadyPlaying = 1 AND episodeId = :episodeId LIMIT 1")

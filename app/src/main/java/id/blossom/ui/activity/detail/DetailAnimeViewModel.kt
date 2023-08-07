@@ -32,9 +32,11 @@ class DetailAnimeViewModel(
     val listFavoriteLiveData: LiveData<List<FavoriteEntity>> = _listFavoriteLiveData
 
 
-    private val _uiStateCurrentWatch = MutableLiveData<UiState<List<CurrentWatchEntity>>>(UiState.Loading)
-    val uiStateCurrentWatch: LiveData<UiState<List<CurrentWatchEntity>>> = _uiStateCurrentWatch
+    private val _uiStateListCurrentWatch = MutableLiveData<List<CurrentWatchEntity>>()
+    val uiStateListCurrentWatch: LiveData<List<CurrentWatchEntity>> = _uiStateListCurrentWatch
 
+    private val _uiStateCurrentWatch = MutableLiveData<CurrentWatchEntity>()
+    val uiStateCurrentWatch: LiveData<CurrentWatchEntity> = _uiStateCurrentWatch
     init {
 
     }
@@ -76,12 +78,19 @@ class DetailAnimeViewModel(
     }
 
 
-    fun getCurrentWatchByEpisodeId(episodeId: String) {
+    fun getAllCurrentWatchByEpisodeId(episodeId: String) {
         viewModelScope.launch {
             Log.e("DetailAnimeViewModel", "getCurrentWatchByEpisodeId: $episodeId")
             val currentState = localAnimeRepository.getAllCurrentWatchByAnimeId(episodeId)
             Log.e("DetailAnimeViewModel", "getCurrentWatchByEpisodeId: $currentState")
-            _uiStateCurrentWatch.postValue(UiState.Success(currentState))
+            _uiStateListCurrentWatch.postValue(currentState)
+        }
+    }
+
+    fun getCurrentWatchByAnimeId(animeId: String) {
+        viewModelScope.launch {
+            val currentState = localAnimeRepository.getCurrentWatchByAnimeId(animeId)
+            _uiStateCurrentWatch.postValue(currentState)
         }
     }
 

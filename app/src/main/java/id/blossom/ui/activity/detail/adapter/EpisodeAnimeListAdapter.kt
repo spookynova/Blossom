@@ -20,10 +20,28 @@ class EpisodeAnimeListAdapter(
 
     class DataViewHolder(private val binding: ItemEpisodeHolderBinding) :
         RecyclerView.ViewHolder(binding.root) {
+
+        private val currentWatch = (itemView.context as DetailAnimeActivity).currentWatchList
+
         fun bind(value: DetailAnimeEpisodeItem, position: Int) {
             binding.tvEpisodeListTitle.text = value.epsTitle.toString()
+
+            currentWatch.map {
+                if (it.episodeId == value.episodeId) {
+                    val duration = it.duration
+                    val currentDuration = it.currentDuration
+                    val progress = (currentDuration.toFloat() / duration.toFloat()) * 100
+                    binding.progressWatchAnimeEpisode.progress = progress.toInt()
+                    Log.e("EpisodeAnimeListAdapter", "bind: $progress")
+                } else {
+                    Log.e("EpisodeAnimeListAdapter", "bind: else")
+                    binding.progressWatchAnimeEpisode.progress = 0
+                    binding.progressWatchAnimeEpisode.visibility = View.GONE
+                }
+            }
+
             itemView.setOnClickListener {
-                StreamAnimeActivity.start(it.context, value.episodeId.toString(), "")
+                StreamAnimeActivity.start(it.context, value.episodeId.toString())
             }
         }
     }

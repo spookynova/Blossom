@@ -18,6 +18,7 @@
         android:title="Favorite" />
     <item
         android:id="@+id/tab_settings"
+        android:visible="false"
         android:icon="@drawable/ic_settings"
         android:title="Settings" />
 </menu>

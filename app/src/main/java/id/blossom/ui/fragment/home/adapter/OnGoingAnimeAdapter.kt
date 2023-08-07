@@ -27,7 +27,7 @@ class OnGoingAnimeAdapter (
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(binding.animeImageView)
             itemView.setOnClickListener {
-                StreamAnimeActivity.start(it.context, value.animeId.toString(),"")
+                StreamAnimeActivity.start(it.context, value.episodeId.toString())
             }
         }
     }
@@ -45,7 +45,7 @@ class OnGoingAnimeAdapter (
 
         // check if animeId is null, then dont show the item
         ongoingList.map {
-            if (it.animeId == "" || it.animeId == null) {
+            if (it.episodeId == "" || it.episodeId == null) {
                 ongoingList.remove(it)
             }
         }

@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "user_settings")
 data class UserSettingsEntity(
     @PrimaryKey(autoGenerate = true)
-    val id: Int,
+    val id: Int = 0,
     var isDarkMode: Boolean,
     var vidQuality : String,
     var isDevMode : Boolean

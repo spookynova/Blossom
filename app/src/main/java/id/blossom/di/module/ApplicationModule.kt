@@ -26,7 +26,7 @@ class ApplicationModule(private val application: BlossomApp) {
 
     @BaseUrl
     @Provides
-    fun provideBaseUrl(): String = "https://anime-indo-rest-api-psi.vercel.app/"
+    fun provideBaseUrl(): String = "https://anime-indo-rest-api-imkryp70n.vercel.app/"
 
     @Provides
     @Singleton

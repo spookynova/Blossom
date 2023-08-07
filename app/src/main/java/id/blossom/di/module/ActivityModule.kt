@@ -14,6 +14,8 @@ import id.blossom.ui.activity.genres.GenresResultViewModel
 import id.blossom.ui.activity.genres.adapter.GenresResultAdapter
 import id.blossom.ui.activity.stream.StreamAnimeViewModel
 import id.blossom.ui.base.ViewModelProviderFactory
+import id.blossom.ui.fragment.favorite.FavoriteViewModel
+import id.blossom.ui.fragment.favorite.adapter.FavoriteAnimeAdapter
 import id.blossom.ui.fragment.home.HomeViewModel
 import id.blossom.ui.fragment.home.adapter.GenresAnimeAdapter
 import id.blossom.ui.fragment.home.adapter.OnGoingAnimeAdapter
@@ -22,6 +24,7 @@ import id.blossom.ui.fragment.schedule.ScheduleViewModel
 import id.blossom.ui.fragment.schedule.adapter.ScheduleAnimeAdapter
 import id.blossom.ui.fragment.search.SearchViewModel
 import id.blossom.ui.fragment.search.adapter.SearchAnimeAdapter
+import id.blossom.ui.fragment.settings.SettingsViewModel
 
 @Module
 class ActivityModule(private val activity: AppCompatActivity) {
@@ -82,6 +85,22 @@ class ActivityModule(private val activity: AppCompatActivity) {
     }
 
     @Provides
+    fun provideFavoriteViewModel(animeRepository: AnimeRepository, localAnimeRepository: LocalAnimeRepository): FavoriteViewModel {
+        return ViewModelProvider(activity,
+            ViewModelProviderFactory(FavoriteViewModel::class) {
+                FavoriteViewModel(animeRepository,localAnimeRepository)
+            })[FavoriteViewModel::class.java]
+    }
+
+    @Provides
+    fun provideSettingViewModel(animeRepository: AnimeRepository, localAnimeRepository: LocalAnimeRepository): SettingsViewModel {
+        return ViewModelProvider(activity,
+            ViewModelProviderFactory(SettingsViewModel::class) {
+                SettingsViewModel(animeRepository,localAnimeRepository)
+            })[SettingsViewModel::class.java]
+    }
+
+    @Provides
     fun provideRecentAnimeAdapter() = RecentAnimeAdapter(ArrayList())
 
     @Provides
@@ -101,5 +120,8 @@ class ActivityModule(private val activity: AppCompatActivity) {
 
     @Provides
     fun provideGenresResultAdapter() = GenresResultAdapter(ArrayList())
+
+    @Provides
+    fun provideFavoriteAnimeAdapter() = FavoriteAnimeAdapter(ArrayList())
 
 }

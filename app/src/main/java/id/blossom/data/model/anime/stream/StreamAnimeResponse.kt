@@ -10,6 +10,12 @@ data class StreamAnimeResponse(
 	@field:SerializedName("data")
 	val data: List<StreamAnimeDataItem>? = null,
 
+	@field:SerializedName("animeId")
+	val animeId: String? = null,
+
+	@field:SerializedName("animeTitle")
+	val animeTitle: String? = null,
+
 	@field:SerializedName("episodeUrl")
 	val episodeUrl: List<EpisodeUrlItem>? = null,
 

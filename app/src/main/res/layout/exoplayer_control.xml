@@ -16,6 +16,16 @@
 
     </TextView>
     <TextView
+        android:id="@+id/exo_video_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorPrimary"
+        android:layout_margin="10dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+    </TextView>
+    <TextView
         android:id="@+id/exo_watermark"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -152,7 +162,7 @@
     </ImageView>
 
     <TextView
-        android:id="@+id/exo_duration"
+        android:id="@+id/exo_position"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -171,22 +181,22 @@
         android:layout_margin="2dp"
         android:text="/"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="@+id/exo_duration"
-        app:layout_constraintStart_toEndOf="@+id/exo_duration"
-        app:layout_constraintTop_toTopOf="@+id/exo_duration">
+        app:layout_constraintBottom_toBottomOf="@+id/exo_position"
+        app:layout_constraintStart_toEndOf="@+id/exo_position"
+        app:layout_constraintTop_toTopOf="@+id/exo_position">
 
     </TextView>
 
     <TextView
-        android:id="@+id/exo_position"
+        android:id="@+id/exo_duration"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="00"
         android:layout_marginStart="2dp"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="@+id/exo_duration"
+        app:layout_constraintBottom_toBottomOf="@+id/exo_position"
         app:layout_constraintStart_toEndOf="@+id/textView"
-        app:layout_constraintTop_toTopOf="@+id/exo_duration"
+        app:layout_constraintTop_toTopOf="@+id/exo_position"
         app:layout_constraintVertical_bias="0.0">
 
     </TextView>

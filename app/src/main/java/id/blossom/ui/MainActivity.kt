@@ -57,6 +57,10 @@ class MainActivity : AppCompatActivity() {
 
 
     }
+
+    override fun onRestart() {
+        super.onRestart()
+    }
 }
 class ViewPagerAdapter(supportFragmentManager: FragmentManager) :
     FragmentPagerAdapter(supportFragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
@@ -74,6 +78,6 @@ class ViewPagerAdapter(supportFragmentManager: FragmentManager) :
     }
 
     override fun getCount(): Int {
-        return 5
+        return 4 // hide settings fragment because it's not ready yet
     }
 }

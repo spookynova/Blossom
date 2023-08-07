@@ -39,7 +39,7 @@
                 android:max="100"
                 android:progress="50"
                 app:trackCornerRadius="10dp"
-                app:trackThickness="10dp" />
+                app:trackThickness="5dp" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 

@@ -194,6 +194,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="Tonton Sekarang"
+                android:tag="watch"
                 android:textColor="@color/white"
                 app:cornerRadius="20dp" />
 
@@ -207,6 +208,20 @@
 
 
         </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_detail_anime_episode"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            app:layout_constraintTop_toBottomOf="@id/ll_detail_anime_info"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:orientation="vertical" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_detail_anime_episode"
             android:layout_width="match_parent"
@@ -216,6 +231,7 @@
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
+            android:visibility="gone"
             android:layout_marginBottom="20dp"
             app:layout_constraintTop_toBottomOf="@id/ll_detail_anime_info"
             app:layout_constraintBottom_toBottomOf="parent"

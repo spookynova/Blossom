@@ -22,8 +22,8 @@ data class OngoingAnimeResponse(
 
 data class OngoingAnimeDataItem(
 
-	@field:SerializedName("animeId")
-	val animeId: String? = null,
+	@field:SerializedName("episodeId")
+	val episodeId: String? = null,
 
 	@field:SerializedName("episode")
 	val episode: String? = null,

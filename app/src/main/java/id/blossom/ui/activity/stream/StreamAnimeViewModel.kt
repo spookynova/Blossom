@@ -10,6 +10,7 @@ import id.blossom.data.model.anime.stream.StreamAnimeResponse
 import id.blossom.data.repository.anime.AnimeRepository
 import id.blossom.data.repository.anime.LocalAnimeRepository
 import id.blossom.data.storage.entity.CurrentWatchEntity
+import id.blossom.data.storage.entity.UserSettingsEntity
 import id.blossom.ui.base.UiState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -28,6 +29,10 @@ class StreamAnimeViewModel (private val animeRepository: AnimeRepository, privat
 
     private val _uiStateCurrentWatch = MutableLiveData<CurrentWatchEntity>()
     val uiStateCurrentWatch: LiveData<CurrentWatchEntity> = _uiStateCurrentWatch
+
+
+    private val _uiStateUserSetting = MutableLiveData<UserSettingsEntity>()
+    val uiStateUserSetting: LiveData<UserSettingsEntity> = _uiStateUserSetting
 
 
     init {
@@ -51,12 +56,8 @@ class StreamAnimeViewModel (private val animeRepository: AnimeRepository, privat
         localAnimeRepository.insertCurrentWatch(data)
     }
 
-    fun updateSavedStateDuration(isAlreadyPlaying : Boolean, duration : Long, currentDuration: Long,animeId : String, episodeId : String) {
-        if (animeId == "") {
-            localAnimeRepository.updateCurrentWatchByEpisodeId(isAlreadyPlaying, duration,currentDuration ,episodeId)
-        } else {
-            localAnimeRepository.updateCurrentWatchByAnimeId(isAlreadyPlaying, duration, currentDuration, animeId)
-        }
+    fun updateSavedStateDuration(isAlreadyPlaying : Boolean, duration : Long, currentDuration: Long, episodeId : String) {
+        localAnimeRepository.updateCurrentWatchByEpisodeId(isAlreadyPlaying, duration,currentDuration ,episodeId)
     }
 
 
@@ -72,6 +73,19 @@ class StreamAnimeViewModel (private val animeRepository: AnimeRepository, privat
             val currentState = localAnimeRepository.getCurrentWatchByEpisodeId(episodeId)
             _uiStateCurrentWatch.postValue(currentState)
         }
+
+    }
+
+
+    fun getUserSetting() {
+        viewModelScope.launch {
+            val userSetting = localAnimeRepository.getUserSettings()
+            _uiStateUserSetting.postValue(userSetting)
+        }
+    }
+
+    fun setUserSetting(userSettingsEntity: UserSettingsEntity) {
+        localAnimeRepository.insertUserSettings(userSettingsEntity)
     }
 
 }
