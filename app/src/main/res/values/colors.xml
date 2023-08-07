@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App Colors -->
+    <color name="colorPrimary">#E84A28</color>           <!-- Orange -->
+    <color name="colorPrimaryLight">#FFA07A</color>      <!-- Light Salmon -->
+    <color name="colorBack">#F6F6F6</color>
+    <color name="colorPrimaryDark">#98FB98</color>       <!-- Mint Green -->
+    <color name="colorAccent">#FFC0CB</color>            <!-- Pink -->
+    <color name="colorBackground">#E6E6FA</color>        <!-- Lavender -->
+    <color name="colorText">#000000</color>              <!-- Black -->
+    <color name="colorButton">#87CEEB</color>            <!-- Sky Blue -->
+    <color name="colorHighlight">#FFDAB9</color>         <!-- Peach -->
+    <!-- Gray 100 -->
+    <color name="colorGray100">#F5F5F5</color>
+    <color name="colorGray150">#FFF1EE</color>
+    <color name="colorGray200">#EEEEEE</color>
+    <color name="colorGray300">#E0E0E0</color>
+    <color name="colorGray400">#BDBDBD</color>
+    <color name="colorGray500">#9E9E9E</color>
+    <color name="colorGray600">#757575</color>
+
+    <!-- Dark Mode Colors -->
+    <color name="colorPrimaryDarkMode">#E84A28</color>           <!-- Dark Gray -->
+    <color name="colorAccentDarkMode">#FF1493</color>             <!-- Deep Pink -->
+    <color name="colorBackgroundDarkMode">#483D8B</color>         <!-- Dark Slate Blue -->
+    <color name="colorTextDarkMode">#FFFFFF</color>               <!-- White -->
+    <color name="colorButtonDarkMode">#008080</color>             <!-- Teal -->
+    <color name="colorHighlightDarkMode">#9932CC</color>          <!-- Dark Orchid -->
+</resources>
