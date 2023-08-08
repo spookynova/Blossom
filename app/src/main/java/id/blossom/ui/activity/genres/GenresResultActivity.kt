@@ -54,7 +54,7 @@ class GenresResultActivity : AppCompatActivity() {
 
         binding.tvSelectedGenre.text = "Hasil Pencarian Genre $genreName"
         if (genreId != null) {
-            genresResultViewModel.fetchGenresResultAnime(genreId)
+            genresResultViewModel.fetchGenresResultAnime(genreId, page)
         } else {
             Toast.makeText(this, "Genre Id is null", Toast.LENGTH_LONG).show()
         }
@@ -65,42 +65,38 @@ class GenresResultActivity : AppCompatActivity() {
         binding.animeResultGenreRv.setLoadingListener(object : XRecyclerView.LoadingListener {
             override fun onRefresh() {
                 page = 1
-                //genresResultViewModel.fetchGenresResultAnime(genreId.toString())
+                genresResultViewModel.fetchGenresResultAnime(genreId.toString(), page)
             }
 
             override fun onLoadMore() {
                 page++
-                //scheduleViewModel.fetchScheduleAnime(page, queryDays.toString())
+                genresResultViewModel.fetchGenresResultAnime(genreId.toString(), page)
             }
 
         })
     }
 
     private fun setupObserver() {
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                genresResultViewModel.uiStateGenresResultAnime.collect {
-                    when (it) {
-                        is UiState.Success -> {
-                            binding.progressPropertiesGenre.visibility = View.GONE
-                            renderPropertiesGenre(it.data)
-                        }
-                        is UiState.Loading -> {
-                            binding.progressPropertiesGenre.visibility = View.VISIBLE
-                        }
-                        is UiState.Error -> {
-                            //Handle Error
-                            Toast.makeText(this@GenresResultActivity, it.message, Toast.LENGTH_LONG)
-                                .show()
-                        }
-                    }
+
+        genresResultViewModel.uiStateGenresResultAnime.observe(this) {
+            when (it) {
+                is UiState.Success -> {
+                    binding.progressPropertiesGenre.visibility = View.GONE
+                    renderPropertiesGenre(it.data)
+                }
+                is UiState.Loading -> {
+                    binding.progressPropertiesGenre.visibility = View.VISIBLE
+                }
+                is UiState.Error -> {
+                    //Handle Error
+                    Toast.makeText(this@GenresResultActivity, it.message, Toast.LENGTH_LONG)
+                        .show()
                 }
             }
         }
     }
 
     private fun renderPropertiesGenre(data: List<PropertyGenresAnimeDataItem>) {
-        genresResultAdapter.clearData()
         genresResultAdapter.addData(data)
         genresResultAdapter.notifyDataSetChanged()
     }
@@ -116,7 +112,7 @@ class GenresResultActivity : AppCompatActivity() {
 
 
     companion object {
-        fun start(context : Context, genreId : String, genreName : String ){
+        fun start(context: Context, genreId: String, genreName: String) {
             val intent = Intent(context, GenresResultActivity::class.java)
             intent.putExtra("genreId", genreId)
             intent.putExtra("genreName", genreName)

@@ -3,22 +3,24 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:name="id.blossom.BlossomApp"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/sakura"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/sakura"
         android:supportsRtl="true"
         android:theme="@style/Theme.Blossom"
         tools:targetApi="31">
+        <activity
+            android:name=".ui.activity.faq.FaqActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.activity.about.AboutActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.activity.showall.ShowAllAnimeActivity"
             android:exported="false" />

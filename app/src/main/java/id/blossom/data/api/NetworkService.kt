@@ -61,6 +61,7 @@ interface NetworkService {
     @GET("luckyanime/properties/genre/{genreId}")
     suspend fun getPropertiesGenreAnime(
         @Path("genreId") genreId: String,
+        @Query("page") page: Int,
     ) : PropertyGenresAnimeResponse
 
     // streaming

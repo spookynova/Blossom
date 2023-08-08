@@ -13,6 +13,7 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Font family -->
         <item name="bottomSheetDialogTheme">@style/CustomBottomSheetDialog</item>
+        <item name="dialogTheme">@style/CustomBottomSheet</item>
         <item name="fontFamily">@font/uni_neue_bold_full</item>
     </style>
 

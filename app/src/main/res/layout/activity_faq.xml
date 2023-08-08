@@ -1,0 +1,163 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="FAQ - Blossom Anime Streaming"
+            android:textColor="@color/colorPrimary"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
+            android:background="@android:color/darker_gray" />
+
+        <!-- Pertanyaan 1 -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Apakah aplikasi ini gratis?"
+            android:textColor="@color/colorPrimary"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ya, aplikasi ini benar-benar gratis. Kami ingin memberikan pengalaman menonton anime yang menyenangkan bagi semua pengguna." />
+
+        <!-- Pertanyaan 2 -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Apakah aplikasi ini beriklan?"
+            android:textColor="@color/colorPrimary"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tidak, kami bangga dapat memberikan pengalaman streaming anime tanpa iklan yang mengganggu. Nikmati anime kesukaan Anda tanpa gangguan." />
+
+        <!-- Pertanyaan 3 -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Apakah aplikasi ini OpenSource?"
+            android:textColor="@color/colorPrimary"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ya, aplikasi ini bersifat OpenSource. Repository dapat ditemukan di akun GitHub kami: evnx32." />
+
+        <!-- Pertanyaan 4 -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Min, sumber anime nya dari mana?"
+            android:textColor="@color/colorPrimary"
+            android:textSize="16sp"
+
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Aplikasi ini mengambil sumber anime dari website Kusonime. Nikmati berbagai pilihan anime berkualitas di aplikasi kami." />
+
+        <!-- Pertanyaan 5 -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Min, apakah aplikasi ini legal?"
+            android:textColor="@color/colorPrimary"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Aplikasi kami bukan berasal dari pihak distribusi anime resmi seperti Crunchyroll atau Bstation. Namun, kami selalu berusaha menyediakan pengalaman streaming yang berkualitas dan aman." />
+
+        <!-- Pertanyaan 6 -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Min, apakah saya boleh menulis ulang source code aplikasi ini dan mengubah namanya?"
+            android:textColor="@color/colorPrimary"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Aplikasi ini dilisensikan di bawah lisensi Apache 2.0. Anda diperbolehkan untuk menulis ulang source code dan mengubah namanya sesuai kebutuhan Anda. Namun, Anda harus tetap mematuhi ketentuan lisensi dan memberikan atribusi yang sesuai." />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Yang boleh dilakukan:"
+            android:textColor="@color/colorPrimary"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="- Anda diperbolehkan untuk menyalin, mengubah, dan mengembangkan ulang source code aplikasi ini sesuai kebutuhan Anda." />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="- Anda dapat mengganti atau mengubah nama aplikasi sesuai preferensi Anda." />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="Yang tidak boleh dilakukan:"
+            android:textColor="@color/colorPrimary"
+            android:textSize="16sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="- Anda tidak diperbolehkan untuk mengklaim bahwa Anda adalah pencipta atau pemilik asli dari source code ini tanpa memberikan atribusi yang sesuai kepada pemilik aslinya." />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="- Anda tidak boleh menghapus atau mengubah informasi hak cipta, lisensi, atau pemberitahuan lain yang ada dalam source code." />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+
+            android:text="Anda tetap harus mematuhi semua ketentuan yang terdapat dalam lisensi Apache 2.0. Dengan mematuhi ketentuan ini, Anda dapat dengan aman memanfaatkan dan mengembangkan ulang aplikasi ini."
+            android:textColor="@color/colorPrimary"
+            android:textSize="16sp" />
+    </LinearLayout>
+</ScrollView>

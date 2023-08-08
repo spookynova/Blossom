@@ -21,7 +21,8 @@ class ShowAllOngoingAnimeAdapter (
         RecyclerView.ViewHolder(binding.root) {
         fun bind(value: OngoingAnimeDataItem) {
             binding.animeTitle.text = value.title.toString()
-            binding.llAnimeRate.visibility = View.GONE
+            binding.animeRateDetail.text = value.episode.toString()
+            binding.animeRateIcon.visibility = View.GONE
             Glide.with(binding.animeImageView.context).load(value.image)
                 .diskCacheStrategy(DiskCacheStrategy.ALL).into(binding.animeImageView)
             itemView.setOnClickListener {

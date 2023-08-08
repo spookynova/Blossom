@@ -1,0 +1,10 @@
+<resources>
+    <declare-styleable name="EvnxBanner">
+        <attr name="icon" format="reference" />
+        <attr name="Title" format="string" />
+        <attr name="description" format="string" />
+        <attr name="image_character" format="reference" />
+        <attr name="horizontal_bias" format="float" />
+        <attr name="vertical_bias" format="float" />
+    </declare-styleable>
+</resources>

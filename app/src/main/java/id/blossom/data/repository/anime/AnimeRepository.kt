@@ -67,9 +67,9 @@ class AnimeRepository @Inject constructor(private val networkService: NetworkSer
         }
     }
 
-    fun getResultGenresAnime(genres: String): Flow<List<PropertyGenresAnimeDataItem>> {
+    fun getResultGenresAnime(genres: String, page: Int): Flow<List<PropertyGenresAnimeDataItem>> {
         return flow {
-            emit(networkService.getPropertiesGenreAnime(genres))
+            emit(networkService.getPropertiesGenreAnime(genres, page))
         }.map {
             it.data!!
         }

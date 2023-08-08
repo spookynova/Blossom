@@ -57,6 +57,7 @@
                             android:textColor="@color/white" />
 
                         <ImageView
+                            android:id="@+id/animeRateIcon"
                             android:layout_width="18dp"
                             android:layout_height="18dp"
                             android:layout_gravity="center"

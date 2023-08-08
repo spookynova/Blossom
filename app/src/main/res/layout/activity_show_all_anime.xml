@@ -57,7 +57,16 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_margin="10dp"
+        android:background="@color/colorGray200"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/order_by_layout"
+        />
         <ProgressBar
             android:id="@+id/progressPropertiesGenre"
             android:layout_width="wrap_content"
@@ -66,7 +75,7 @@
             android:layout_marginTop="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/order_by_layout" />
+            app:layout_constraintTop_toBottomOf="@+id/divider" />
 
         <com.jcodecraeer.xrecyclerview.XRecyclerView
             android:id="@+id/all_anime_rv"
@@ -93,6 +102,6 @@
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/anime_result_genre_rv" />
+            app:layout_constraintTop_toBottomOf="@+id/all_anime_rv" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

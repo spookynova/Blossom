@@ -54,13 +54,13 @@ class StreamAnimeActivity : AppCompatActivity() {
     lateinit var binding: ActivityStreamBinding
     private var exoPlayer: SimpleExoPlayer? = null
 
-    lateinit var videoSettingBinding : VideoSettingBinding
-    lateinit var videoSettingDialogBinding : PopupVideoSettingCfgBinding
-    lateinit var itemVideoSettingBinding : ItemVideoSettingCfgBinding
-    private var userSettings : UserSettingsEntity? = null
-    private var settingsBottomSheet : BottomSheetDialog? = null
-
-    private var listVidQuality : List<EpisodeUrlItem> = listOf()
+    lateinit var videoSettingBinding: VideoSettingBinding
+    lateinit var videoSettingDialogBinding: PopupVideoSettingCfgBinding
+    lateinit var itemVideoSettingBinding: ItemVideoSettingCfgBinding
+    private var userSettings: UserSettingsEntity? = null
+    private var settingsBottomSheet: BottomSheetDialog? = null
+    private var savedDurationState = 0L
+    private var listVidQuality: List<EpisodeUrlItem> = listOf()
 
     // ExoPlayer Components
     private lateinit var fwdBtn: ImageView
@@ -80,6 +80,7 @@ class StreamAnimeActivity : AppCompatActivity() {
 
     private var _selectedVidQuality = ""
     private var _selectedVidSpeed = ""
+
     @Inject
     lateinit var streamAnimeViewModel: StreamAnimeViewModel
 
@@ -137,12 +138,12 @@ class StreamAnimeActivity : AppCompatActivity() {
             streamAnimeViewModel.savedStateDuration = exoPlayer!!.currentPosition
             val orientation: Int = this@StreamAnimeActivity.resources.configuration.orientation
             if (orientation == Configuration.ORIENTATION_PORTRAIT) {
-                fillScreen.visibility = View.VISIBLE
+                //fillScreen.visibility = View.VISIBLE
                 requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE
                 binding.playerView.resizeMode = AspectRatioFrameLayout.RESIZE_MODE_FIT
                 binding.playerView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
             } else {
-                fillScreen.visibility = View.GONE
+                //fillScreen.visibility = View.GONE
                 requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
                 binding.playerView.resizeMode = AspectRatioFrameLayout.RESIZE_MODE_FIT
                 binding.playerView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
@@ -171,7 +172,7 @@ class StreamAnimeActivity : AppCompatActivity() {
             }
         }
 
-        streamAnimeViewModel.uiStateUserSetting.observe(this@StreamAnimeActivity){
+        streamAnimeViewModel.uiStateUserSetting.observe(this@StreamAnimeActivity) {
             if (it != null) {
                 userSettings = it
             } else {
@@ -188,8 +189,8 @@ class StreamAnimeActivity : AppCompatActivity() {
     }
 
 
-    private fun renderEpisodeUrlList(list: List<EpisodeUrlItem>, quality : String) {
-        val selectedResolution = if (quality != ""){
+    private fun renderEpisodeUrlList(list: List<EpisodeUrlItem>, quality: String) {
+        val selectedResolution = if (quality != "") {
             quality
         } else {
             userSettings!!.vidQuality
@@ -203,7 +204,9 @@ class StreamAnimeActivity : AppCompatActivity() {
             list.map {
                 if (it.size == selectedResolution) {
                     setupPlayer(it.episode!!)
+                    return@map
                 }
+                setupPlayer(list[0].episode!!)
             }
         }
     }
@@ -231,6 +234,8 @@ class StreamAnimeActivity : AppCompatActivity() {
             exoPlayer?.playWhenReady = true
 
             exoTitle.text = animeTitle
+
+
             streamAnimeViewModel.uiStateCurrentWatch.observe(this) { data ->
                 if (data == null) {
                     streamAnimeViewModel.setSavedStateDuration(
@@ -248,18 +253,35 @@ class StreamAnimeActivity : AppCompatActivity() {
                 }
             }
 
+            if (savedDurationState != 0L) {
+                exoPlayer!!.seekTo(savedDurationState)
+            }
             exoPlayer?.addListener(object : Player.EventListener {
                 override fun onPlayerStateChanged(playWhenReady: Boolean, playbackState: Int) {
                     if (playbackState == Player.STATE_ENDED) {
                         Toast.makeText(
                             this@StreamAnimeActivity,
-                            "Video has ended",
+                            "Video berakhir",
                             Toast.LENGTH_LONG
                         ).show()
+
+                        if (exoPlayer != null) {
+                            val duration = exoPlayer!!.duration
+                            val currentPosition = exoPlayer!!.currentPosition
+                            lifecycleScope.launch {
+                                if (currentPosition > 0) {
+                                    streamAnimeViewModel.updateSavedStateDuration(
+                                        true,
+                                        duration,
+                                        currentPosition,
+                                        episodeId
+                                    )
+                                }
+                            }
+                        }
                     }
                 }
             })
-
             handler.post(updateRunnable)
         }
     }
@@ -298,13 +320,34 @@ class StreamAnimeActivity : AppCompatActivity() {
 
 
     override fun onBackPressed() {
-        super.onBackPressed()
         if (exoPlayer != null) {
-
             if (exoPlayer!!.isPlaying) {
                 streamAnimeViewModel.savedStateDuration = exoPlayer!!.currentPosition
                 exoPlayer?.playWhenReady = false
             }
+        }
+
+        val orientation = resources.configuration.orientation
+
+        if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+            val duration = exoPlayer!!.duration
+            val currentPosition = exoPlayer!!.currentPosition
+            lifecycleScope.launch {
+                if (currentPosition > 0) {
+                    streamAnimeViewModel.updateSavedStateDuration(
+                        true,
+                        duration,
+                        currentPosition,
+                        episodeId
+                    )
+                }
+            }
+            super.onBackPressed()
+
+        } else {
+            requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
+            binding.playerView.resizeMode = AspectRatioFrameLayout.RESIZE_MODE_FIT
+            binding.playerView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
         }
     }
 
@@ -377,20 +420,19 @@ class StreamAnimeActivity : AppCompatActivity() {
     }
 
 
-
-    private fun showSettingVideo(){
+    private fun showSettingVideo() {
         settingsBottomSheet = BottomSheetDialog(this)
         videoSettingBinding = VideoSettingBinding.inflate(layoutInflater)
         settingsBottomSheet!!.setContentView(videoSettingBinding.root)
 
 
-        if (_selectedVidQuality != ""){
+        if (_selectedVidQuality != "") {
             videoSettingBinding.tvVideoQuality.text = _selectedVidQuality
         } else {
             videoSettingBinding.tvVideoQuality.text = userSettings!!.vidQuality
         }
 
-        if (_selectedVidSpeed != ""){
+        if (_selectedVidSpeed != "") {
             videoSettingBinding.tvVideoSpeed.text = _selectedVidSpeed
         } else {
             videoSettingBinding.tvVideoSpeed.text = "1.0x"
@@ -411,6 +453,7 @@ class StreamAnimeActivity : AppCompatActivity() {
 
         settingsBottomSheet!!.show()
     }
+
     private fun showConfig(cfg: Int) {
 
         val popupDialog = Dialog(this)
@@ -432,10 +475,15 @@ class StreamAnimeActivity : AppCompatActivity() {
                         _selectedVidQuality = quality.size.toString()
                         videoSettingBinding.tvVideoQuality.text = quality.size
                         settingsBottomSheet!!.dismiss()
+                        saveStateDuration = exoPlayer!!.currentPosition
                         exoPlayer?.release()
                         renderEpisodeUrlList(listVidQuality, quality.size.toString())
 
-                        Toast.makeText(this@StreamAnimeActivity, "Video Quality ${quality.size}", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            this@StreamAnimeActivity,
+                            "Video Quality ${quality.size}",
+                            Toast.LENGTH_SHORT
+                        ).show()
 
                     }
                     videoSettingDialogBinding.llItemVideoSettingCfg.addView(itemBinding.root)
@@ -452,8 +500,13 @@ class StreamAnimeActivity : AppCompatActivity() {
                         popupDialog.dismiss()
                         _selectedVidSpeed = speed.toString()
                         settingsBottomSheet!!.dismiss()
-                        changeVideoSpeed(speed)
-                        Toast.makeText(this@StreamAnimeActivity, "Video Speed $speed", Toast.LENGTH_SHORT).show()
+                        exoPlayer?.playbackParameters = PlaybackParameters(speed)
+
+                        Toast.makeText(
+                            this@StreamAnimeActivity,
+                            "Video Speed $speed",
+                            Toast.LENGTH_SHORT
+                        ).show()
 
                     }
                     videoSettingDialogBinding.llItemVideoSettingCfg.addView(itemBinding.root)
@@ -462,11 +515,4 @@ class StreamAnimeActivity : AppCompatActivity() {
         }
         popupDialog.show()
     }
-
-
-    fun changeVideoSpeed(speed: Float) {
-        exoPlayer?.playbackParameters = PlaybackParameters(speed)
-    }
-
-
 }
