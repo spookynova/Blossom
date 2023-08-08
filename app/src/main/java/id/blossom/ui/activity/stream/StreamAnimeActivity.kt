@@ -204,17 +204,15 @@ class StreamAnimeActivity : AppCompatActivity() {
             list.map {
                 if (it.size == selectedResolution) {
                     setupPlayer(it.episode!!)
-                    return@map
                 }
-                setupPlayer(list[0].episode!!)
             }
         }
     }
 
 
     private fun setupPlayer(url: String) {
-        if (url.isEmpty()) {
-            Toast.makeText(this, "Url is empty", Toast.LENGTH_LONG).show()
+        if (url.isEmpty() || url.isBlank()) {
+            Toast.makeText(this, "Video tidak tersedia, silahkan coba ubah resolusi", Toast.LENGTH_SHORT).show()
             return
         }
 
