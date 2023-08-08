@@ -1,6 +1,8 @@
 package id.blossom.ui.fragment.schedule
 
 import android.text.format.DateFormat
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import id.blossom.data.model.anime.recent.RecentAnimeData
@@ -14,8 +16,8 @@ import kotlinx.coroutines.launch
 
 class ScheduleViewModel (private val animeRepository: AnimeRepository) : ViewModel() {
     private val _uiStateScheduleAnime =
-        MutableStateFlow<UiState<List<ScheduleAnimeDataItem>>>(UiState.Loading)
-    val uiStateScheduleAnime: StateFlow<UiState<List<ScheduleAnimeDataItem>>> = _uiStateScheduleAnime
+        MutableLiveData<UiState<List<ScheduleAnimeDataItem>>>(UiState.Loading)
+    val uiStateScheduleAnime: LiveData<UiState<List<ScheduleAnimeDataItem>>> = _uiStateScheduleAnime
 
     init {
         fetchScheduleAnime(1, DateFormat.format("EEEE", System.currentTimeMillis()).toString())

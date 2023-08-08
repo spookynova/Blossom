@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- App Colors -->
-    <color name="colorPrimary">#E84A28</color>           <!-- Orange -->
-    <color name="colorPrimaryLight">#FFA07A</color>      <!-- Light Salmon -->
+    <color name="colorPrimary">#E84A28</color>
+    <color name="colorPrimaryLight">#FFA07A</color>
     <color name="colorBack">#F6F6F6</color>
-    <color name="colorPrimaryDark">#98FB98</color>       <!-- Mint Green -->
-    <color name="colorAccent">#FFC0CB</color>            <!-- Pink -->
-    <color name="colorBackground">#E6E6FA</color>        <!-- Lavender -->
-    <color name="colorText">#000000</color>              <!-- Black -->
-    <color name="colorButton">#87CEEB</color>            <!-- Sky Blue -->
-    <color name="colorHighlight">#FFDAB9</color>         <!-- Peach -->
+    <color name="colorPrimaryDark">#98FB98</color>
+    <color name="colorAccent">#FFA07A</color>
+    <color name="colorBackground">#E6E6FA</color>
+    <color name="colorText">#000000</color>
+    <color name="colorButton">#87CEEB</color>
+    <color name="colorHighlight">#FFDAB9</color>
     <!-- Gray 100 -->
     <color name="colorGray100">#F5F5F5</color>
     <color name="colorGray150">#FFF1EE</color>
@@ -20,10 +20,13 @@
     <color name="colorGray600">#757575</color>
 
     <!-- Dark Mode Colors -->
-    <color name="colorPrimaryDarkMode">#E84A28</color>           <!-- Dark Gray -->
-    <color name="colorAccentDarkMode">#FF1493</color>             <!-- Deep Pink -->
-    <color name="colorBackgroundDarkMode">#483D8B</color>         <!-- Dark Slate Blue -->
-    <color name="colorTextDarkMode">#FFFFFF</color>               <!-- White -->
-    <color name="colorButtonDarkMode">#008080</color>             <!-- Teal -->
-    <color name="colorHighlightDarkMode">#9932CC</color>          <!-- Dark Orchid -->
+    <color name="colorPrimaryDarkMode">#FF6E40</color>          <!-- Adjusted primary color -->
+    <color name="colorPrimaryLightDarkMode">#FFA07A</color>
+    <color name="colorBackDarkMode">#252525</color>             <!-- Dark background color -->
+    <color name="colorAccentDarkMode">#FFA07A</color>
+    <color name="colorBackgroundDarkMode">#1E1E1E</color>       <!-- Slightly darker background -->
+    <color name="colorTextDarkMode">#FFFFFF</color>             <!-- White text for contrast -->
+    <color name="colorButtonDarkMode">#1976D2</color>           <!-- Adjusted button color -->
+    <color name="colorHighlightDarkMode">#FFDAB9</color>
+
 </resources>

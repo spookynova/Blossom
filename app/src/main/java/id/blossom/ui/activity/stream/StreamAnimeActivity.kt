@@ -117,6 +117,10 @@ class StreamAnimeActivity : AppCompatActivity() {
         exoSettingVideo = findViewById(R.id.exo_settings_video)
         exoTitle = findViewById(R.id.exo_video_title)
 
+
+        fillScreen.visibility = View.GONE
+        floatWindowBtn.visibility = View.GONE
+
         fwdBtn.setOnClickListener {
             exoPlayer?.seekTo(exoPlayer!!.currentPosition + 10000)
         }
@@ -428,6 +432,7 @@ class StreamAnimeActivity : AppCompatActivity() {
                         _selectedVidQuality = quality.size.toString()
                         videoSettingBinding.tvVideoQuality.text = quality.size
                         settingsBottomSheet!!.dismiss()
+                        exoPlayer?.release()
                         renderEpisodeUrlList(listVidQuality, quality.size.toString())
 
                         Toast.makeText(this@StreamAnimeActivity, "Video Quality ${quality.size}", Toast.LENGTH_SHORT).show()

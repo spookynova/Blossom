@@ -12,6 +12,9 @@ import id.blossom.ui.activity.detail.DetailAnimeViewModel
 import id.blossom.ui.activity.detail.adapter.EpisodeAnimeListAdapter
 import id.blossom.ui.activity.genres.GenresResultViewModel
 import id.blossom.ui.activity.genres.adapter.GenresResultAdapter
+import id.blossom.ui.activity.showall.ShowAllAnimeViewModel
+import id.blossom.ui.activity.showall.adapter.ShowAllOngoingAnimeAdapter
+import id.blossom.ui.activity.showall.adapter.ShowAllRecentAnimeAdapter
 import id.blossom.ui.activity.stream.StreamAnimeViewModel
 import id.blossom.ui.base.ViewModelProviderFactory
 import id.blossom.ui.fragment.favorite.FavoriteViewModel
@@ -101,6 +104,13 @@ class ActivityModule(private val activity: AppCompatActivity) {
     }
 
     @Provides
+    fun provideShowAllAnimeViewModel(animeRepository: AnimeRepository): ShowAllAnimeViewModel {
+        return ViewModelProvider(activity,
+            ViewModelProviderFactory(ShowAllAnimeViewModel::class) {
+                ShowAllAnimeViewModel(animeRepository)
+            })[ShowAllAnimeViewModel::class.java]
+    }
+    @Provides
     fun provideRecentAnimeAdapter() = RecentAnimeAdapter(ArrayList())
 
     @Provides
@@ -123,5 +133,11 @@ class ActivityModule(private val activity: AppCompatActivity) {
 
     @Provides
     fun provideFavoriteAnimeAdapter() = FavoriteAnimeAdapter(ArrayList())
+
+    @Provides
+    fun provideShowAllRecentAnimeAdapter() = ShowAllRecentAnimeAdapter(ArrayList())
+
+    @Provides
+    fun provideShowAllOnGoingAnimeAdapter() = ShowAllOngoingAnimeAdapter(ArrayList())
 
 }

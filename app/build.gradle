@@ -19,8 +19,15 @@ android {
 
     buildTypes {
         release {
+            minifyEnabled true
+            multiDexEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+        debug {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            multiDexEnabled true
         }
     }
     compileOptions {
@@ -52,7 +59,9 @@ dependencies {
     implementation 'com.scwang.wave:MultiWaveHeader:1.0.0'
     implementation 'com.github.todou:nestrefresh:0.0.8'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
-
+    implementation 'com.jcodecraeer:xrecyclerview:1.6.0'
+    implementation 'nl.bryanderidder:themed-toggle-button-group:1.4.1'
+    implementation 'com.github.cachapa:ExpandableLayout:2.9.2'
     implementation 'android.arch.lifecycle:extensions:1.1.1'
     implementation 'me.relex:circleindicator:2.1.6'
     implementation 'org.imaginativeworld.whynotimagecarousel:whynotimagecarousel:2.1.0'

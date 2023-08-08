@@ -1,22 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.fragment.search.SearchFragment">
+    tools:context=".ui.activity.showall.ShowAllAnimeActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
         <LinearLayout
             android:id="@+id/ll_header_app"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
-            android:orientation="vertical">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
             <com.scwang.wave.MultiWaveHeader
                 android:id="@+id/waveHeader"
                 android:layout_width="match_parent"
@@ -26,20 +24,38 @@
 
 
             <TextView
-                android:id="@+id/tv_selected_genre"
+                android:id="@+id/tv_selected_properties"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:layout_marginEnd="10dp"
                 android:layout_marginTop="10dp"
-                android:textSize="20dp"
+                android:layout_marginEnd="10dp"
+                android:text="Anime Terbaru"
                 android:textColor="@color/colorPrimary"
-                android:text="Hasil Pencarian"
-                />
+                android:textSize="20dp" />
 
         </LinearLayout>
 
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/order_by_layout"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:hint="Order By"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ll_header_app">
+
+            <AutoCompleteTextView
+                android:id="@+id/order_by_dropdown"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="none"
+                />
+
+        </com.google.android.material.textfield.TextInputLayout>
 
 
         <ProgressBar
@@ -50,18 +66,19 @@
             android:layout_marginTop="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/ll_header_app" />
+            app:layout_constraintTop_toBottomOf="@+id/order_by_layout" />
+
         <com.jcodecraeer.xrecyclerview.XRecyclerView
-            android:id="@+id/anime_result_genre_rv"
+            android:id="@+id/all_anime_rv"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="10dp"
+            android:layout_height="0dp"
             android:layout_marginStart="7dp"
             android:layout_marginEnd="7dp"
             android:nestedScrollingEnabled="false"
-            app:layout_constraintTop_toBottomOf="@+id/progressPropertiesGenre"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/progressPropertiesGenre"
+            app:layout_constraintBottom_toBottomOf="parent"
             />
 
         <TextView
@@ -74,9 +91,8 @@
             android:textSize="20sp"
             android:textStyle="bold"
             android:visibility="gone"
-            app:layout_constraintTop_toBottomOf="@+id/anime_search_rv"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/anime_result_genre_rv" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

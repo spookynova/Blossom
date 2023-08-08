@@ -6,6 +6,7 @@ import id.blossom.di.ActivityScope
 import id.blossom.di.module.ActivityModule
 import id.blossom.ui.activity.detail.DetailAnimeActivity
 import id.blossom.ui.activity.genres.GenresResultActivity
+import id.blossom.ui.activity.showall.ShowAllAnimeActivity
 import id.blossom.ui.activity.stream.StreamAnimeActivity
 import id.blossom.ui.fragment.favorite.FavoriteFragment
 import id.blossom.ui.fragment.home.HomeFragment
@@ -20,6 +21,7 @@ interface ActivityComponent {
     fun inject(activity: DetailAnimeActivity)
     fun inject(activity: GenresResultActivity)
     fun inject(activity: StreamAnimeActivity)
+    fun inject(activity: ShowAllAnimeActivity)
 
     // Add the inject function for each fragment
     fun inject(fragment: HomeFragment)

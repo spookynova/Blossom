@@ -11,6 +11,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.jcodecraeer.xrecyclerview.XRecyclerView
 import id.blossom.BlossomApp
 import id.blossom.data.model.anime.genres.result.PropertyGenresAnimeDataItem
 import id.blossom.databinding.ActivityGenresResultBinding
@@ -31,6 +32,8 @@ class GenresResultActivity : AppCompatActivity() {
 
     @Inject
     lateinit var genresResultAdapter: GenresResultAdapter
+
+    private var page = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,10 +59,21 @@ class GenresResultActivity : AppCompatActivity() {
             Toast.makeText(this, "Genre Id is null", Toast.LENGTH_LONG).show()
         }
 
-        binding.animeSearchRv.adapter = genresResultAdapter
-        binding.animeSearchRv.layoutManager =
+        binding.animeResultGenreRv.adapter = genresResultAdapter
+        binding.animeResultGenreRv.layoutManager =
             StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
+        binding.animeResultGenreRv.setLoadingListener(object : XRecyclerView.LoadingListener {
+            override fun onRefresh() {
+                page = 1
+                //genresResultViewModel.fetchGenresResultAnime(genreId.toString())
+            }
 
+            override fun onLoadMore() {
+                page++
+                //scheduleViewModel.fetchScheduleAnime(page, queryDays.toString())
+            }
+
+        })
     }
 
     private fun setupObserver() {

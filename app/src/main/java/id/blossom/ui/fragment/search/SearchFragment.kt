@@ -13,6 +13,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.jcodecraeer.xrecyclerview.XRecyclerView
 import id.blossom.BlossomApp
 import id.blossom.data.model.anime.recent.RecentAnimeData
 import id.blossom.data.model.anime.search.SearchAnimeDataItem
@@ -84,13 +85,25 @@ class SearchFragment : Fragment() {
             }
         )
 
+
         // recycler view
         binding.animeSearchRv.adapter = searchAnimeAdapter
-
         // staggered grid layout manager
         binding.animeSearchRv.apply {
             layoutManager = StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
+            setLoadingMoreEnabled(false)
+            setLoadingListener(object : XRecyclerView.LoadingListener{
+                override fun onRefresh() {
+                    searchViewModel.fetchSearchAnime(binding.searchAnimeEt.text.toString())
+                }
+
+                override fun onLoadMore() {
+                    // do nothing
+                }
+
+            })
         }
+
     }
 
     private fun setupObserver(){

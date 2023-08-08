@@ -1,7 +1,8 @@
 package id.blossom.utils
 
 object AppConstant {
-
+    const val VIEW_TYPE_ITEM = 0
+    const val VIEW_TYPE_LOADING = 1
     const val ALL = "all"
     const val API_KEY = "9f6482a584804376874b848980b7a044"
     const val COUNTRY = "us"

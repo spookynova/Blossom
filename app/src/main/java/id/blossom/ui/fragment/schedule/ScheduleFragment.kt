@@ -13,6 +13,8 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.google.android.material.tabs.TabLayout
+import com.jcodecraeer.xrecyclerview.ArrowRefreshHeader
+import com.jcodecraeer.xrecyclerview.XRecyclerView
 import id.blossom.BlossomApp
 import id.blossom.data.model.anime.schedule.ScheduleAnimeDataItem
 import id.blossom.databinding.FragmentScheduleBinding
@@ -38,7 +40,7 @@ class ScheduleFragment : Fragment() {
     @Inject
     lateinit var scheduleAnimeAdapter: ScheduleAnimeAdapter
 
-    private var queryDays : String? = null
+    private var queryDays: String? = null
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -61,15 +63,19 @@ class ScheduleFragment : Fragment() {
             layoutManager = StaggeredGridLayoutManager(3, StaggeredGridLayoutManager.VERTICAL)
         }
 
+
         // load more data when scroll to bottom
-        binding.animeScheduleRv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                // check if recycler view scroll reach the bottom
-                if (!recyclerView.canScrollVertically(1)) {
-                    page++
-                    scheduleViewModel.fetchScheduleAnime(page,queryDays.toString())
-                }
+        binding.animeScheduleRv.setLoadingListener(object : XRecyclerView.LoadingListener {
+            override fun onRefresh() {
+                page = 1
+                scheduleViewModel.fetchScheduleAnime(1, queryDays.toString())
             }
+
+            override fun onLoadMore() {
+                page++
+                scheduleViewModel.fetchScheduleAnime(page, queryDays.toString())
+            }
+
         })
 
         binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
@@ -99,12 +105,16 @@ class ScheduleFragment : Fragment() {
                 }
                 binding.progressSheduleAnime.visibility = View.VISIBLE
                 binding.animeScheduleRv.visibility = View.GONE
-                scheduleViewModel.fetchScheduleAnime(1,queryDays.toString())
+                scheduleAnimeAdapter.clearData()
+                page = 1
+                scheduleViewModel.fetchScheduleAnime(1, queryDays.toString())
 
             }
+
             override fun onTabUnselected(tab: TabLayout.Tab?) {
 
             }
+
             override fun onTabReselected(tab: TabLayout.Tab?) {
 
             }
@@ -112,39 +122,38 @@ class ScheduleFragment : Fragment() {
     }
 
     private fun setupObserver() {
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                scheduleViewModel.uiStateScheduleAnime.collect {
-                    when (it) {
-                        is UiState.Success -> {
-                            binding.animeScheduleRv.visibility = View.VISIBLE
-                            binding.progressSheduleAnime.visibility = View.GONE
-                            renderListSchedule(it.data)
-                        }
-                        is UiState.Loading -> {
-                            binding.progressSheduleAnime.visibility = View.VISIBLE
-                        }
-                        is UiState.Error -> {
-                            //Handle Error
-                            Toast.makeText(context, it.message, Toast.LENGTH_LONG)
-                                .show()
-                        }
-                    }
+
+        scheduleViewModel.uiStateScheduleAnime.observe(viewLifecycleOwner) {
+            when (it) {
+                is UiState.Success -> {
+                    binding.animeScheduleRv.visibility = View.VISIBLE
+                    binding.progressSheduleAnime.visibility = View.GONE
+                    renderListSchedule(it.data)
+                }
+                is UiState.Loading -> {
+                    binding.progressSheduleAnime.visibility = View.VISIBLE
+                }
+                is UiState.Error -> {
+                    //Handle Error
+                    Toast.makeText(context, it.message, Toast.LENGTH_LONG)
+                        .show()
                 }
             }
         }
+
     }
 
     private fun renderListSchedule(data: List<ScheduleAnimeDataItem>) {
-        scheduleAnimeAdapter.clearData()
         scheduleAnimeAdapter.addData(data)
         scheduleAnimeAdapter.notifyDataSetChanged()
-
+        binding.animeScheduleRv.refreshComplete()
+        binding.animeScheduleRv.loadMoreComplete()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         // Don't forget to clear the binding reference to avoid memory leaks
+        binding.animeScheduleRv.destroy()
         _binding = null
     }
 

@@ -1,21 +1,39 @@
-# Add project specific ProGuard rules here.
-# You can control the set of applied configuration files using the
-# proguardFiles setting in build.gradle.
-#
-# For more details, see
-#   http://developer.android.com/guide/developing/tools/proguard.html
+# General configuration
+-dontwarn com.squareup.okhttp.**
+-dontwarn okhttp3.**
+-dontwarn okio.**
 
-# If your project uses WebView with JS, uncomment the following
-# and specify the fully qualified class name to the JavaScript interface
-# class:
-#-keepclassmembers class fqcn.of.javascript.interface.for.webview {
-#   public *;
-#}
+# Optimization options
+-optimizationpasses 5
+-dontusemixedcaseclassnames
+-dontskipnonpubliclibraryclasses
+-dontpreverify
+-verbose
 
-# Uncomment this to preserve the line number information for
-# debugging stack traces.
-#-keepattributes SourceFile,LineNumberTable
+# Obfuscation options
+-renamesourcefileattribute SourceFile
+-keepattributes SourceFile,LineNumberTable
+-keepattributes Signature
+-keepattributes *Annotation*
+-keepparameternames
+-keep class **.R
+-keepclassmembers class **.R$* {
+    public static <fields>;
+}
 
-# If you keep the line number information, uncomment this to
-# hide the original source file name.
-#-renamesourcefileattribute SourceFile
+
+# Keep Android specific classes and methods
+-keep class android.support.** { *; }
+-keep interface android.support.** { *; }
+-keep class androidx.annotation.** { *; }
+-keep class androidx.appcompat.widget.** { *; }
+-keep class androidx.lifecycle.** { *; }
+
+# Keep specific libraries (adjust as needed)
+-keep class com.google.gson.** { *; }
+-keep class org.json.** { *; }
+
+
+# Keep your model classes and fields (adjust as needed)
+-keep class id.blossom.data.model.** { *; }
+

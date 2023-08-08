@@ -18,6 +18,7 @@ import id.blossom.databinding.FragmentHomeBinding
 import id.blossom.di.component.DaggerActivityComponent
 import id.blossom.di.module.ActivityModule
 import id.blossom.ui.MainActivity
+import id.blossom.ui.activity.showall.ShowAllAnimeActivity
 import id.blossom.ui.base.UiState
 import id.blossom.ui.fragment.home.adapter.GenresAnimeAdapter
 import id.blossom.ui.fragment.home.adapter.OnGoingAnimeAdapter
@@ -82,6 +83,14 @@ class HomeFragment : Fragment() {
             LinearLayoutManager.HORIZONTAL,
             false
         )
+
+        binding.tvLihatSemuaRecentAnime.setOnClickListener {
+            ShowAllAnimeActivity.start(requireContext(), "recent")
+        }
+
+        binding.tvLihatSemuaOngoingAnime.setOnClickListener {
+            ShowAllAnimeActivity.start(requireContext(), "ongoing")
+        }
 
         // horizontal rv
         binding.ongoingAnimeRv.layoutManager = LinearLayoutManager(
