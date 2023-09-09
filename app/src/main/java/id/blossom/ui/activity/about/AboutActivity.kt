@@ -49,7 +49,7 @@ class AboutActivity : AppCompatActivity() {
         binding.llFacebook.setOnClickListener {
             customBrowser.launchUrl(
                 this,
-                Uri.parse("https://www.facebook.com/KanMaruKun")
+                Uri.parse("https://www.facebook.com/Evnx32")
             )
         }
 
