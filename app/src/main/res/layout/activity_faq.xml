@@ -81,7 +81,7 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Aplikasi ini mengambil sumber anime dari website Kusonime. Nikmati berbagai pilihan anime berkualitas di aplikasi kami." />
+            android:text="Aplikasi ini mengambil sumber anime dari website Kuramanime. Nikmati berbagai pilihan anime berkualitas di aplikasi kami." />
 
         <!-- Pertanyaan 5 -->
         <TextView
