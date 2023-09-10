@@ -28,6 +28,10 @@
     <li><a href="https://www.github.com/evnx32">@evnx32</a></li>
 </ul>
 
+<h2 id="note">Note</h2>
+<p>Untuk REST API, silahkan hosting sendiri karena akan dinonaktifkan pada 1 Oktober 2023</p>
+<a href="https://github.com/evnx32/AnimeIndo-Rest-API">AnimeIndo-Rest-API</a>
+
 <h2 id="contributing">Contributing</h2>
 <p>Contributions are always welcome!</p>
 <p>See <code>contributing.md</code> for ways to get started.</p>
