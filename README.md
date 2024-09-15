@@ -1,4 +1,5 @@
 <p><img src="https://raw.githubusercontent.com/evnx32/Blossom/main/assets/blossom-preview.png" alt="App Screenshot"></p>
+<h2 id="archieved" align="center">This repository is no longer maintained.</h2>
 <h1 id="blossom">Blossom</h1>
 <p>Aplikasi nonton anime sub Indonesia tanpa iklan.</p>
 <p align="center"><a href="https://choosealicense.com/licenses/apache-2.0/"><img alt="GitHub" src="https://img.shields.io/github/license/evnx32/NontanCLI?style=flat">
@@ -25,7 +26,7 @@
 
 <h2 id="authors">Authors</h2>
 <ul>
-    <li><a href="https://www.github.com/evnx32">@evnx32</a></li>
+    <li><a href="https://www.github.com/spookynova">@spookynova</a></li>
 </ul>
 
 <h2 id="note">Note</h2>
